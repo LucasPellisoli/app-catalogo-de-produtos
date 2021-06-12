@@ -1,4 +1,4 @@
-package br.com.pellisoli.app_catalogo_de_produtos;
+package br.com.pellisoli.app_catalogo_de_produtos.helpers;
 
 import com.google.android.material.appbar.AppBarLayout;
 

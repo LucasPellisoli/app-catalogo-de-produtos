@@ -19,13 +19,17 @@
             android:background="@color/smokyWhite"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:expandedTitleTextAppearance="@style/Theme.ExpandedBarTextStyle"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="310dp"
+                android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="?attr/actionBarSize"
                 android:orientation="vertical"
+                android:visibility="visible"
+                android:id="@+id/LinearLayout_header"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,6 +44,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_launcher_round"
+                        android:layout_marginBottom="5dp"
+
                         />
                 </LinearLayout>
                 <TextView
@@ -49,7 +55,8 @@
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:textAlignment="center"
                     >
                 </TextView>
                 <TextView
@@ -58,11 +65,22 @@
                     android:text="Marca 3"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:textAlignment="center"
                     android:gravity="center_horizontal|center_vertical"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="15dp"
                     >
                 </TextView>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pesquisar ..."
+                    android:drawableRight="@drawable/ic_baseline_search_24"
+                    android:textSize="20sp"
+                    android:lineHeight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:focusedByDefault="false"
+                    android:focusableInTouchMode="true"
+                    ></EditText>
             </LinearLayout>
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
@@ -72,7 +90,6 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:navigationIcon="@mipmap/ic_launcher"
                 android:visibility="invisible"
                 android:id="@+id/MaterialToolbar"
                 android:padding="5dp"
@@ -81,7 +98,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
+
                     >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher"></ImageView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

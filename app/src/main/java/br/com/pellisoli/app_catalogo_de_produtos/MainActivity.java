@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.pellisoli.app_catalogo_de_produtos.helpers.AppBarStateChangeListener;
 import br.com.pellisoli.app_catalogo_de_produtos.item.GetItem;
 import br.com.pellisoli.app_catalogo_de_produtos.item.Item;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemAdapter;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
   public ItemAdapter itemAdapter;
   private AppBarLayout appBarLayout;
   private MaterialToolbar materialToolbar;
+  private LinearLayout linearLayout_header;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     appBarLayout = findViewById(R.id.AppBarLayout);
     materialToolbar = findViewById(R.id.MaterialToolbar);
-
+    linearLayout_header = findViewById(R.id.LinearLayout_header);
     if (Request.isNetwork(getApplicationContext())){
 
       Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
@@ -64,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d("STATE", state.name());
         if(state.name() == "COLLAPSED"){
           materialToolbar.setVisibility(View.VISIBLE);
+          linearLayout_header.setVisibility(View.INVISIBLE);
         }else{
           materialToolbar.setVisibility(View.INVISIBLE);
+          linearLayout_header.setVisibility(View.VISIBLE);
         }
       }
     });
