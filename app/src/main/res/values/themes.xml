@@ -12,5 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="Theme.ExpandedBarTextStyle" parent="Theme.Appcatalogodeprodutos">
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="navigationIcon">@android:color/transparent</item>
     </style>
 </resources>

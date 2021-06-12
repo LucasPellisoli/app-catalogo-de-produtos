@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:id="@+id/item_view_image"
+        android:src="@drawable/ic_launcher_background"
+        >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/item_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Teste"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"></TextView>
+    <TextView
+        android:id="@+id/item_view_price"
+        android:text="R$ 30.00"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        >
+    </TextView>
+</LinearLayout >
