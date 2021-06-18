@@ -1,12 +1,14 @@
 package br.com.pellisoli.app_catalogo_de_produtos;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -25,6 +27,7 @@ import br.com.pellisoli.app_catalogo_de_produtos.helpers.AppBarStateChangeListen
 import br.com.pellisoli.app_catalogo_de_produtos.item.GetItem;
 import br.com.pellisoli.app_catalogo_de_produtos.item.Item;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemAdapter;
+import br.com.pellisoli.app_catalogo_de_produtos.item.ItemDAO;
 import br.com.pellisoli.app_catalogo_de_produtos.services.Request;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
           materialToolbar.setVisibility(View.INVISIBLE);
           linearLayout_header.setVisibility(View.VISIBLE);
         }
+      }
+    });
+
+    listViewItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Item item = listItems.get(position);
+        ItemDAO.insert(item, MainActivity.this);
+        Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
+        intent.putExtra("itemID", item.getId());
+        startActivity( intent );
       }
     });
   }
@@ -125,4 +139,6 @@ public class MainActivity extends AppCompatActivity {
       this.progressBarLoadProducts.setVisibility(View.INVISIBLE);
     }
   }
+
+  // TODO: remover android:usesCleartextTraffic="true" do manifest quando tiver HTTPS;
 }
