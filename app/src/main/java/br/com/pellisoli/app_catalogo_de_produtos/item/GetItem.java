@@ -32,18 +32,6 @@ public class GetItem extends AsyncTask<String, String, String> {
     this.list_activity = activity;
   }
 
-  private void setInListView(List<Item> listItems){
-//    ArrayAdapter adapter = new ArrayAdapter(this.activity, android.R.layout.simple_list_item_1, listItems);
-    if(this.main_activity != null){
-      ItemAdapter itemAdapter = new ItemAdapter(this.main_activity, listItems);
-      this.main_activity.listViewItem.setAdapter(itemAdapter);
-    }else {
-      ItemAdapter itemAdapter = new ItemAdapter(this.list_activity, listItems);
-      this.list_activity.listViewItem.setAdapter(itemAdapter);
-    }
-
-  }
-
   @Override
   protected void onPreExecute() {
     super.onPreExecute();

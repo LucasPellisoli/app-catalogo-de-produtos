@@ -66,9 +66,11 @@ public class Request {
       URL url = new URL( this.baseUrl + path);
 
       conn = (HttpURLConnection) url.openConnection();
-      conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
       conn.setRequestProperty("charset", "utf-8");
+      conn.setRequestProperty("Cache-Control", "no-cache");
 
+      conn.setDefaultUseCaches(false);
+      conn.setUseCaches(false);
       return this.requestResponse(conn.getInputStream());
 
     }catch (Exception e){
@@ -90,7 +92,7 @@ public class Request {
 
       conn.setRequestMethod("POST");
 
-      conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+      conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoInput(true);
       conn.setDoOutput(true);
       conn.setUseCaches(false);

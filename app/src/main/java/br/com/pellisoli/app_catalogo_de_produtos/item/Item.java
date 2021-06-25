@@ -188,16 +188,17 @@ public class Item {
     json += "\"price\": \"" + item.price + "\",";
 
     if(item.images != null && !item.images.isEmpty())
-      json += "\"images\": \"" + item.images.get(0) + "\",";
+      json += "\"images\": [\"" + item.images.get(0) + "\"],";
 
     if(item.tags != null && !item.tags.isEmpty()){
       json += "\"tags\": [";
 
       for (String tag : item.tags)
-        json += "{\"value\": \""+ tag +"\", \"type\": { \"id\": 1, \"description\": \"padrão\", \"visible\": true, \"list\": false, \"listvalues\": \"\", \"active\": true\n }, \"active\": true\n}";
+        json += "{\"value\": \""+ tag +"\", \"type\": { \"id\": 1, \"description\": \"padrao\", \"visible\": true, \"list\": false, \"listvalues\": \"\", \"active\": true\n }, \"active\": true\n}";
 
-      json += "]";
+      json += "],";
     }
+    json += "\"active\": true";
 
     return  json += "}";
   }
