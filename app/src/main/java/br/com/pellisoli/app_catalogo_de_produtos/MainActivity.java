@@ -34,6 +34,7 @@ import br.com.pellisoli.app_catalogo_de_produtos.item.GetItem;
 import br.com.pellisoli.app_catalogo_de_produtos.item.Item;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemAdapter;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemDAO;
+import br.com.pellisoli.app_catalogo_de_produtos.services.Request;
 
 public class MainActivity extends AppCompatActivity {
 

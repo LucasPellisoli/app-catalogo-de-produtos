@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.pellisoli.app_catalogo_de_produtos.item.CreateItem;
 import br.com.pellisoli.app_catalogo_de_produtos.item.Item;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemDAO;
+import br.com.pellisoli.app_catalogo_de_produtos.services.Request;
 
 public class FormItemActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class FormItemActivity extends AppCompatActivity {
     private EditText price;
     private EditText tags;
     private Button btnSalver;
+
+    private String id;
 
 
 
@@ -42,7 +46,12 @@ public class FormItemActivity extends AppCompatActivity {
         btnSalver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                id = getIntent().getStringExtra("id");
                 Item item = new Item();
+
+                if(id!= null && id != "")
+                    item.setId(id);
+
                 item.setDescription(description.getText().toString());
                 item.setTitle(etTitle.getText().toString());
                 item.setPrice(Double.parseDouble(price.getText().toString()));
@@ -50,7 +59,13 @@ public class FormItemActivity extends AppCompatActivity {
                 String[] strArray = tags.getText().toString().split(",");
                 item.setTags(new ArrayList(Arrays.asList(strArray)));
 
-                createItem(item);
+                item.setImages(new ArrayList(Arrays.asList(new String[]{"https://cdn.gaudiumpress.org/wp-content/uploads/2021/04/13172034/Imagem-de-Cristo-construida-no-Rio-Grande-do-Sul-sera-a-maior-do-Brasil-1.jpg"})));
+
+                if(id!= null && id != ""){
+
+                }else {
+                    createItem(item);
+                }
             }
         });
     }
@@ -58,7 +73,9 @@ public class FormItemActivity extends AppCompatActivity {
     private void createItem(Item item){
         String json = Item.itemToJson(item);
 
-        int a = 0;
-    }
+        Request request = new Request(Request.SEVIDOR);
+        CreateItem createItem = new CreateItem("/api/item", json);
+        createItem.execute();
+        }
 }
 
