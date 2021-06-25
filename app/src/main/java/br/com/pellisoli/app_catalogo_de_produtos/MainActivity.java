@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
         if (actionId == EditorInfo.IME_ACTION_DONE) {
-          // TODO do something
           Log.d("EDITTEXT", "search_menu_open_input: "+ search_menu_open_input.getText());
           Intent intent = new Intent(MainActivity.this, ListItemActivity.class);
           intent.putExtra("query", search_menu_open_input.getText().toString());

@@ -25,6 +25,7 @@ public class FormItemActivity extends AppCompatActivity {
     private EditText description;
     private EditText price;
     private EditText tags;
+    private EditText image;
     private Button btnSalver;
 
     private String id;
@@ -43,7 +44,7 @@ public class FormItemActivity extends AppCompatActivity {
         price = findViewById(R.id.form_price);
         tags = findViewById(R.id.form_tags);
         btnSalver = findViewById(R.id.form_salvar);
-
+        image = findViewById(R.id.form_image)
 
         btnSalver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,7 @@ public class FormItemActivity extends AppCompatActivity {
                 String[] strArray = tags.getText().toString().split(",");
                 item.setTags(new ArrayList(Arrays.asList(strArray)));
 
-                item.setImages(new ArrayList(Arrays.asList(new String[]{"https://cdn.gaudiumpress.org/wp-content/uploads/2021/04/13172034/Imagem-de-Cristo-construida-no-Rio-Grande-do-Sul-sera-a-maior-do-Brasil-1.jpg"})));
+                item.setImages(new ArrayList(Arrays.asList(new String[]{image.getText().toString()})));
 
                 if(id!= null && id != ""){
                     editItem(item);
