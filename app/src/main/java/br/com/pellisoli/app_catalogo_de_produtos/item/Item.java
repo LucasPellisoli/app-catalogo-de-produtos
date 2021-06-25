@@ -177,7 +177,7 @@ public class Item {
     String json = "{";
 
     if(item.id != null && !item.id.isEmpty())
-      json += "\"id\": " + item.id + ",";
+      json += "\"id\": \"" + item.id + "\",";
 
     if(item.description != null && !item.description.isEmpty())
       json += "\"description\": \"" +  item.description + "\",";

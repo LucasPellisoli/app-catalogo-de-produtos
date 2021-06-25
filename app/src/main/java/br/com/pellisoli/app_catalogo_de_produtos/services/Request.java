@@ -83,7 +83,6 @@ public class Request {
 
   public String post(String  path, String... strings){
     HttpURLConnection conn;
-
     try {
 
       URL url = new URL( this.baseUrl + path);
@@ -117,24 +116,20 @@ public class Request {
     try {
 
       URL url = new URL( this.baseUrl + path);
-
       conn = (HttpURLConnection) url.openConnection();
 
       conn.setRequestMethod("PUT");
 
-      conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+      conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoInput(true);
-      conn.setDoOutput(true);
+      conn.setDoOutput(false);
       conn.setUseCaches(false);
       conn.setRequestProperty("charset", "utf-8");
 
-
       this.requestBody(new DataOutputStream(conn.getOutputStream()), strings);
-
       return this.requestResponse(conn.getInputStream());
-
     }catch (Exception e){
-      Log.e("REQUEST POST", e.getMessage());
+      Log.e("REQUEST PUT", e.getMessage());
     }finally {
 
     }
@@ -145,5 +140,4 @@ public class Request {
     ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     return conn.getActiveNetworkInfo().isConnected();
   };
-
 }

@@ -19,14 +19,19 @@ public class ItemDAO {
     valores.put("title", item.getTitle() );
     valores.put("description", item.getDescription());
     valores.put("price", item.getPrice());
-    valores.put("image_64", ImageHelper.BitMapToString(item.getImage()));
+    if(item.getImage() != null)
+     valores.put("image_64", ImageHelper.BitMapToString(item.getImage()));
     valores.put("active", item.getActive());
     valores.put("tags", item.getTagsToString());
 
     Banco banco = new Banco(context);
     SQLiteDatabase db = banco.getWritableDatabase();
 
-    db.insert("Item", null, valores);
+    if(getItensById(context, item.getId()) == null)
+      db.insert("Item", null, valores);
+    else
+      db.update("Item", valores, "id = ?", new String[]{item.getId()});
+
   }
 
   public static List<Item> getItens(Context context){

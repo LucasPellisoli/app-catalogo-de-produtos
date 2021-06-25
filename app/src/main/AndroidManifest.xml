@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appcatalogodeprodutos"
         android:usesCleartextTraffic="true">
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".ListItemActivity" />
-        <activity android:name=".FormItemActivity"></activity>
+        <activity android:name=".FormItemActivity" />
         <activity android:name=".ItemDetailsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

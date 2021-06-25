@@ -1,13 +1,11 @@
 package br.com.pellisoli.app_catalogo_de_produtos;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -47,11 +44,16 @@ public class MainActivity extends AppCompatActivity {
   private LinearLayout linearLayout_header;
   private EditText search_menu_open_input;
   private Button registerItem;
+  private Button login;
+  private Button sair;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    SharedPreferences preferences = this.getSharedPreferences("br.com.pellisoli", Context.MODE_PRIVATE);
+
     this.listItems = new ArrayList<>();
 
     listViewItem = findViewById(R.id.listViewItem);
@@ -67,13 +69,25 @@ public class MainActivity extends AppCompatActivity {
     search_menu_open_input = findViewById(R.id.search_menu_open_input);
     registerItem = findViewById(R.id.btnregisterItem);
 
+    login = findViewById(R.id.login_btn2);
+    sair = findViewById(R.id.sair_btn);
+
     if (Request.isNetwork(getApplicationContext())){
-
       Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
-
     } else {
-
       Toast.makeText(getApplicationContext(), "Internet Is Not Connected", Toast.LENGTH_SHORT).show();
+    }
+
+    String userToken = preferences.getString("userToken", "");
+    if(!userToken.equalsIgnoreCase(""))
+    {
+      registerItem.setVisibility(View.VISIBLE);
+      login.setVisibility(View.INVISIBLE);
+      sair.setVisibility(View.VISIBLE);
+    }else {
+      registerItem.setVisibility(View.INVISIBLE);
+      login.setVisibility(View.VISIBLE);
+      sair.setVisibility(View.INVISIBLE);
     }
 
     registerItem.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +95,25 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         Intent intent = new Intent(MainActivity.this, FormItemActivity.class);
         startActivity( intent );
+      }
+    });
+
+    login.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity( intent );
+      }
+    });
+
+    sair.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("userToken", "");
+        editor.apply();
+        onResume();
       }
     });
 
@@ -152,6 +185,19 @@ public class MainActivity extends AppCompatActivity {
     GetItem getItem = new GetItem(MainActivity.this, "/api/item");
     getItem.execute();
     search_menu_open_input.setText("");
+
+    SharedPreferences preferences = this.getSharedPreferences("br.com.pellisoli", Context.MODE_PRIVATE);
+    String userToken = preferences.getString("userToken", "");
+    if(!userToken.equalsIgnoreCase(""))
+    {
+      registerItem.setVisibility(View.VISIBLE);
+      login.setVisibility(View.INVISIBLE);
+      sair.setVisibility(View.VISIBLE);
+    }else {
+      registerItem.setVisibility(View.INVISIBLE);
+      login.setVisibility(View.VISIBLE);
+      sair.setVisibility(View.INVISIBLE);
+    }
   }
 
   public void upadetList(){
