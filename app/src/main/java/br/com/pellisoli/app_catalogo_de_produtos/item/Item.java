@@ -1,6 +1,7 @@
 package br.com.pellisoli.app_catalogo_de_produtos.item;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -9,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Item {
@@ -37,6 +39,16 @@ public class Item {
     this.description = description;
     this.price = price;
     this.images = images;
+    this.active = active;
+  }
+
+  public Item(String id, String title, String description, double price, ArrayList<String> images, ArrayList<String> tags, Boolean active) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.price = price;
+    this.images = images;
+    this.tags = tags;
     this.active = active;
   }
 
@@ -98,6 +110,24 @@ public class Item {
     this.active = active;
   }
 
+  public ArrayList<String> getTags() {
+    return tags;
+  }
+
+  public void setTags(ArrayList<String> tags) {
+    this.tags = tags;
+  }
+
+  public String getTagsToString(){
+    return  String.join(", ", this.tags);
+  }
+
+  public void setTagsByString(String tags){
+    String[] parts = tags.split(",");
+    ArrayList<String> tagsArray = new ArrayList<String>(Arrays.asList(parts));
+    setTags(tagsArray);
+  }
+
 
   @NonNull
   @Override
@@ -113,7 +143,6 @@ public class Item {
       if (array.length() > 0){
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonItem = array.getJSONObject(i);
-
             Item item = new Item();
             item.setId(jsonItem.getString("id"));
             item.setTitle(jsonItem.getString("title"));
@@ -128,11 +157,18 @@ public class Item {
             }
             item.setImages(imagens);
 
+            ArrayList<String> tagItem = new ArrayList<>();
+            JSONArray tagsArray = jsonItem.getJSONArray("tags");
+            for (int j = 0; j < tagsArray.length(); j++) {
+              JSONObject jsonTag = tagsArray.getJSONObject(j);
+              tagItem.add(jsonTag.getString("value"));
+            }
+            item.setTags(tagItem);
             list.add(item);
           }
       }
     }catch (JSONException e){
-
+        Log.e("JsonToItem", e.getMessage());
     }
     return  list;
   }

@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
+import br.com.pellisoli.app_catalogo_de_produtos.MainActivity;
+import br.com.pellisoli.app_catalogo_de_produtos.item.ItemDAO;
+
 public class Banco extends SQLiteOpenHelper {
   private static final int VERSAO = 1;
   private static final String NOME = "Catalogo_E_Shop";
@@ -31,6 +34,8 @@ public class Banco extends SQLiteOpenHelper {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    db.execSQL("DROP TABLE Item");
+    onCreate(db);
   }
 
 }

@@ -59,7 +59,6 @@ public class ItemAdapter  extends BaseAdapter {
 
     title.setText(item.getTitle());
     price.setText(item.getPriceFormated());
-
     if (item.getImage() != null) {
       imageView.setImageBitmap(item.getImage());
     } else {

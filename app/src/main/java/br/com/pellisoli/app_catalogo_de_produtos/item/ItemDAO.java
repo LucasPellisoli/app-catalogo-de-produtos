@@ -21,7 +21,7 @@ public class ItemDAO {
     valores.put("price", item.getPrice());
     valores.put("image_64", ImageHelper.BitMapToString(item.getImage()));
     valores.put("active", item.getActive());
-    valores.put("tags", "");
+    valores.put("tags", item.getTagsToString());
 
     Banco banco = new Banco(context);
     SQLiteDatabase db = banco.getWritableDatabase();
@@ -43,7 +43,12 @@ public class ItemDAO {
         item.setDescription(cursor.getString( 2));
         item.setPrice(cursor.getDouble( 3));
         item.setImage(ImageHelper.StringToBitMap(cursor.getString( 4)));
-        item.setActive(true);
+        item.setTagsByString(cursor.getString( 5));
+        if(cursor.getInt( 6) == 1 ){
+          item.setActive(true);
+        }else {
+          item.setActive(false);
+        }
         lista.add( item );
       }while( cursor.moveToNext() );
     }
@@ -62,18 +67,15 @@ public class ItemDAO {
       item.setDescription(cursor.getString( 2));
       item.setPrice(cursor.getDouble( 3));
       item.setImage(ImageHelper.StringToBitMap(cursor.getString( 4)));
-      item.setActive(true);
+      item.setTagsByString(cursor.getString( 5));
+      if(cursor.getInt( 6) == 1 ){
+        item.setActive(true);
+      }else {
+        item.setActive(false);
+      }
       return item;
     }else{
       return null;
     }
   }
 }
-
-//            "     id TEXT NOT NULL PRIMARY KEY," +
-//                    "     title TEXT NOT NULL ," +
-//                    "     description TEXT NOT NULL ," +
-//                    "     price REAL NOT NULL ," +
-//                    "     image_64 TEXT NOT NULL," +
-//                    "     tags TEXT NOT NULL," +
-//                    "     active NUMERIC NOT NULL )"

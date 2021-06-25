@@ -67,7 +67,6 @@ public class GetItem extends AsyncTask<String, String, String> {
       List<Item> listItems = Item.jsonToItem(resposta);
       Log.d("RESPONSE", resposta);
 
-
       if(this.main_activity != null){
         this.main_activity.listItems = listItems;
         this.main_activity.upadetList();
