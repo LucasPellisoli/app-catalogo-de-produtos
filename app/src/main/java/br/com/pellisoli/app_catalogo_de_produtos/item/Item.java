@@ -173,5 +173,34 @@ public class Item {
     return  list;
   }
 
+  public static String itemToJson(Item item){
+    String json = "{";
+
+    if(item.id != null && !item.id.isEmpty())
+      json += "\"id\": " + item.id + ",";
+
+    if(item.description != null && !item.description.isEmpty())
+      json += "\"description\": \"" +  item.description + "\",";
+
+    if(item.title != null && !item.title.isEmpty())
+      json += "\"title\": \"" + item.title  + "\",";
+
+    json += "\"price\": \"" + item.price + "\",";
+
+    if(item.images != null && !item.images.isEmpty())
+      json += "\"images\": \"" + item.images.get(0) + "\",";
+
+    if(item.tags != null && !item.tags.isEmpty()){
+      json += "\"tags\": [";
+
+      for (String tag : item.tags)
+        json += "{\"value\": \""+ tag +"\", \"type\": { \"id\": 1, \"description\": \"padrão\", \"visible\": true, \"list\": false, \"listvalues\": \"\", \"active\": true\n }, \"active\": true\n}";
+
+      json += "]";
+    }
+
+    return  json += "}";
+  }
+
 
 }

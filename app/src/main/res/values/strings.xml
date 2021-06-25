@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Catalogo E-Shop</string>
+    <string name="search" > Pesquisar ...</string>
+    <string name="title" >titulo</string>
+    <string name="description" >Descrição</string>
+    <string name="price" >preço</string>
+    <string name="image" >imagem</string>
+    <string name="active" >ativo</string>
+    <string name="tag" >tags</string>
+    <string name="title_form" >formulario de item</string>
+    <string name="salvar" >salvar</string>
 </resources>

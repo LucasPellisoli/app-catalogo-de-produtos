@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
   private MaterialToolbar materialToolbar;
   private LinearLayout linearLayout_header;
   private EditText search_menu_open_input;
+  private Button registerItem;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,25 @@ public class MainActivity extends AppCompatActivity {
     linearLayout_header = findViewById(R.id.LinearLayout_header);
 
     search_menu_open_input = findViewById(R.id.search_menu_open_input);
+    registerItem = findViewById(R.id.btnregisterItem);
+
+    if (Request.isNetwork(getApplicationContext())){
+
+      Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
+
+    } else {
+
+      Toast.makeText(getApplicationContext(), "Internet Is Not Connected", Toast.LENGTH_SHORT).show();
+    }
+
+    registerItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, FormItemActivity.class);
+        startActivity( intent );
+      }
+    });
+
     appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
       @Override
       public void onStateChanged(AppBarLayout appBarLayout, State state) {

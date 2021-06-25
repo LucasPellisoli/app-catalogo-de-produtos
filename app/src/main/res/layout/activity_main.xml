@@ -23,69 +23,72 @@
             android:focusable="false"
             android:focusableInTouchMode="true"
             >
+
             <LinearLayout
+                android:id="@+id/LinearLayout_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="?attr/actionBarSize"
-                android:orientation="vertical"
-                android:visibility="visible"
-                android:id="@+id/LinearLayout_header"
-                >
+                android:visibility="visible">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    >
+                    android:paddingRight="10dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_launcher_round"
                         android:layout_marginBottom="5dp"
+                        android:src="@mipmap/ic_launcher_round"
 
                         />
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Marca 1"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:gravity="center_horizontal|center_vertical"
                     android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Marca 1"
                     android:textAlignment="center"
-                    >
-                </TextView>
+                    android:textColor="@color/black"
+                    android:textSize="30sp"></TextView>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Marca 3"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
-                    android:gravity="center_horizontal|center_vertical"
                     android:layout_marginBottom="15dp"
-                    >
-                </TextView>
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Marca 3"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
+
+                <Button
+                    android:id="@+id/btnregisterItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="cadastrar"></Button>
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pesquisar ..."
-                    android:drawableRight="@drawable/ic_baseline_search_24"
-                    android:textSize="20sp"
-                    android:lineHeight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:focusedByDefault="false"
+                    android:drawableRight="@drawable/ic_baseline_search_24"
                     android:focusableInTouchMode="true"
                     android:id="@+id/search_menu_open_input"
                     android:singleLine="true"
                     android:imeOptions="actionDone"
                     ></EditText>
             </LinearLayout>
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
