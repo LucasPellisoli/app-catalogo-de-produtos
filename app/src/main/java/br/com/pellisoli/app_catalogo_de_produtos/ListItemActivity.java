@@ -1,26 +1,16 @@
 package br.com.pellisoli.app_catalogo_de_produtos;
 
-import android.Manifest;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -34,7 +24,7 @@ import br.com.pellisoli.app_catalogo_de_produtos.item.Item;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemAdapter;
 import br.com.pellisoli.app_catalogo_de_produtos.item.ItemDAO;
 
-public class MainActivity extends AppCompatActivity {
+public class ListItemActivity extends AppCompatActivity {
 
   public ListView listViewItem;
   public ProgressBar progressBarLoadProducts;
@@ -43,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
   private AppBarLayout appBarLayout;
   private MaterialToolbar materialToolbar;
   private LinearLayout linearLayout_header;
+  public String search_query;
   private EditText search_menu_open_input;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_list_item);
     this.listItems = new ArrayList<>();
 
     listViewItem = findViewById(R.id.listViewItem);
@@ -57,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     progressBarLoadProducts.setVisibility(View.INVISIBLE);
     progressBarLoadProducts.setActivated(false);
 
+    appBarLayout = findViewById(R.id.AppBarLayout);
+    materialToolbar = findViewById(R.id.MaterialToolbar);
     appBarLayout = findViewById(R.id.AppBarLayout);
     materialToolbar = findViewById(R.id.MaterialToolbar);
     linearLayout_header = findViewById(R.id.LinearLayout_header);
@@ -80,60 +73,27 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Item item = listItems.get(position);
-        ItemDAO.insert(item, MainActivity.this);
-        Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
+        ItemDAO.insert(item, ListItemActivity.this);
+        Intent intent = new Intent(ListItemActivity.this, ItemDetailsActivity.class);
         intent.putExtra("itemID", item.getId());
         startActivity( intent );
       }
     });
 
-    search_menu_open_input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-      @Override
-      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-          // TODO do something
-          Log.d("EDITTEXT", "search_menu_open_input: "+ search_menu_open_input.getText());
-          Intent intent = new Intent(MainActivity.this, ListItemActivity.class);
-          intent.putExtra("query", search_menu_open_input.getText().toString());
-          startActivity( intent );
-        }
-        return false;
-      }
-    });
-
-    search_menu_open_input.setOnTouchListener(new TextView.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        final int DRAWABLE_LEFT = 0;
-        final int DRAWABLE_TOP = 1;
-        final int DRAWABLE_RIGHT = 2;
-        final int DRAWABLE_BOTTOM = 3;
-
-        if(event.getAction() == MotionEvent.ACTION_UP) {
-          if(event.getRawX() >= (search_menu_open_input.getRight() - search_menu_open_input.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-            // your action here
-            Log.d("EDITTEXT", "search_menu_open_input: "+ search_menu_open_input.getText());
-            Intent intent = new Intent(MainActivity.this, ListItemActivity.class);
-            intent.putExtra("query", search_menu_open_input.getText().toString());
-            startActivity( intent );
-          }
-        }
-        return false;
-      }
-    });
+    search_query = this.getIntent().getStringExtra("query");
+    search_menu_open_input.setText(search_query);
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    GetItem getItem = new GetItem(MainActivity.this, "/api/item");
+    GetItem getItem = new GetItem( ListItemActivity.this, "/api/item/search/" + search_query);
     getItem.execute();
-    search_menu_open_input.setText("");
+
   }
 
   public void upadetList(){
-    this.itemAdapter = new ItemAdapter(MainActivity.this, listItems);
+    this.itemAdapter = new ItemAdapter(ListItemActivity.this, listItems);
     this.listViewItem.setAdapter(itemAdapter);
   }
 
@@ -147,6 +107,4 @@ public class MainActivity extends AppCompatActivity {
       this.progressBarLoadProducts.setVisibility(View.INVISIBLE);
     }
   }
-
-  // TODO: remover android:usesCleartextTraffic="true" do manifest quando tiver HTTPS;
 }

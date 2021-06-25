@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appcatalogodeprodutos"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ItemDetailsActivity"></activity>
+        <activity android:name=".ListItemActivity" />
+        <activity android:name=".ItemDetailsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
