@@ -81,7 +81,7 @@ public class Request {
     return  null;
   }
 
-  public String post(String  path, String... strings){
+  public String post(String  path, Boolean setDoOutput,String... strings){
     HttpURLConnection conn;
     try {
 
@@ -93,13 +93,12 @@ public class Request {
 
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setDoInput(true);
-      conn.setDoOutput(true);
+      conn.setDoOutput(setDoOutput);
       conn.setUseCaches(false);
       conn.setRequestProperty("charset", "utf-8");
 
 
       this.requestBody(new DataOutputStream(conn.getOutputStream()), strings);
-
       return this.requestResponse(conn.getInputStream());
 
     }catch (Exception e){

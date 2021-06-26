@@ -144,6 +144,9 @@ public class Item {
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonItem = array.getJSONObject(i);
             Item item = new Item();
+            if(!jsonItem.has("title")|| !jsonItem.has("price") || !jsonItem.has("id") || !jsonItem.has("description") ){
+              continue;
+            }
             item.setId(jsonItem.getString("id"));
             item.setTitle(jsonItem.getString("title"));
             item.setDescription(jsonItem.getString("description"));
@@ -185,7 +188,7 @@ public class Item {
     if(item.title != null && !item.title.isEmpty())
       json += "\"title\": \"" + item.title  + "\",";
 
-    json += "\"price\": \"" + item.price + "\",";
+    json += "\"price\": " + item.price + ",";
 
     if(item.images != null && !item.images.isEmpty())
       json += "\"images\": [\"" + item.images.get(0) + "\"],";

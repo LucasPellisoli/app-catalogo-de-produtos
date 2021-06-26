@@ -32,7 +32,7 @@ public class Login extends AsyncTask<String, String, String> {
   @Override
   protected String doInBackground(String... strings) {
     Request request = new Request(Request.SEVIDOR);
-    return request.post(this.path, data);
+    return request.post(this.path, true, data);
   }
 
   @Override

@@ -43,8 +43,9 @@ public class FormItemActivity extends AppCompatActivity {
         description = findViewById(R.id.form_description);
         price = findViewById(R.id.form_price);
         tags = findViewById(R.id.form_tags);
+        image = findViewById(R.id.form_image);
         btnSalver = findViewById(R.id.form_salvar);
-        image = findViewById(R.id.form_image)
+
 
         btnSalver.setOnClickListener(new View.OnClickListener() {
             @Override
